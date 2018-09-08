@@ -24,7 +24,7 @@ public:
         return start-> data;
     };
     T back(){
-        return start->prev->data;
+        return start->prev->data; // Falta validar como en el front
     };
     void print(){
         Node<T> *temp= start;
@@ -37,9 +37,9 @@ public:
     void push_front(T value){
         Node<T> *temp=new Node<T>;
         temp->data=value;
-        if (nodes == 0){
-            start = new Node<T>;
-            start->data = temp->data;
+        if (nodes == 0){ // Sería mejor validar con head, pero está bien
+            start = new Node<T>; // Estás creando data innecesaria
+            start->data = temp->data; 
             start->next = start;
             start->prev = start;
         }
@@ -99,7 +99,7 @@ public:
     T get(int position){
         auto *temp = start;
         if (nodes == 0)throw "Error";
-        if (position >= nodes) throw "Error";
+        if (position >= nodes) throw "Error"; // En una lista circular si se puede obtener el elemento, aún si la posición es mayor a la cantidad de nodos
         for(int contador = 0; contador<nodes; contador++){
             if(contador == position){
                 return temp->data;
@@ -128,7 +128,7 @@ public:
     Iterator<T> begin(){return Iterator<T>(start);}
     Iterator<T> end(){return Iterator<T>(start->prev);}
 
-    ~List(){};
+    ~List(){}; // No hay constructor
 };
 
 #endif
